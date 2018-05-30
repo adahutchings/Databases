@@ -1,0 +1,88 @@
+Exercises
+
+1. What data types do each of these values represent?
+     1. "A Clockwork Orange" : String
+     2. 42 : Integer 
+     3. 09/02/1945 : "09/02/1945" would be a string --- but I found some information on MySQL that leads me to believe that dates have their own data type of "Date".
+     4. 98.7 : Float 
+     5. $15.99 : I believe you need to change this to "$15.99" so it would be a string - if you just remove the $ then it would be a float.  
+
+2. Explain when a database would be used. Explain when a text file would be used.
+	A database is used to manage information where several users may be accessing or changing the information simultaneously. Text files can be used to retain information after a program ends, but they fail when it comes to multiple users manipulating the data at once. An example of a text file use would be JSON.
+
+3. Describe one difference between SQL and other programming languages.
+	SQL is a declarative language. You pass in exactly what you want to get out, but you do not need to include how to find the information, the database already has these procedures built into the engine. 
+
+4. In your own words, explain how the pieces of a database system fit together at a high level.
+	Databases store information in a table layout. They have "categories" which are declared at the top of each column in the table. Each row in the table contains a grouping of values that correspond to the category. Using SQL you create new tables of the information in the database. 
+	
+
+5. Explain the meaning of table, row, column, and value.
+	A table is a set of data elements grouped together with columns and rows that contain values. Columns are the vertical lines and will contain all elements of every row in the vertical line. This might be something like "Rent". Rows are horizontal lines and contain a element from each column. This might be users and would have the users name, address, email, ect. Values are the elements inside the cells of the rows and columns. 
+
+6. List three data types that can be used in a table.
+	Float, Integer, String
+	
+
+7. Given this <payments> table, provide an English description of the following queries and include their results:
+
+	SELECT date, amount // Select the date value and the amount value
+	FROM payments; // From the payments table
+	// RETURNS a table with the following:
+		Date		Amount
+		2016-05-10	1500.00
+		2016-05-10	37.00
+		2016-05-15	124.93
+		2016-05-23	54.72
+
+	SELECT amount // Select the amount
+	FROM payments // From the payments table 
+	WHERE amount > 500; // Where the amount is greater than 500
+	//RETURNS a table with the following:
+		Amount
+		1500.00
+
+	SELECT * // Select all columns for the set of rows  
+	FROM payments // From payments table
+	WHERE payee = 'Mega Foods'; // where the payee is "Mega Foods"
+	//RETURNS a table with the following:
+		Date		Payee		Amount	Memo
+		2016-05-15	'Mega Foods'	124.93	'Groceries'
+	
+
+8. Given this <users> table, write SQL queries using the following criteria and include the output:
+     - The email and sign-up date for the user named DeAndre Data.
+
+	SELECT email, signup
+	FROM users
+	WHERE name = 'DeAndre Data';
+	//RETURNS
+		email			signup
+		datad@comcast.net	'2008-01-20'
+
+     - The user ID for the user with email 'aleesia.algorithm@uw.edu'.
+	
+	SELECT userid
+	FROM users
+	WHERE email = 'aleesia.algorithm@uw.edu';
+	//RETURNS
+		userid
+		1
+
+     - All the columns for the user ID equal to 4.
+	
+	SELECT *
+	FROM users
+	WHERE id = 4;
+	//RETURNS
+		userid	name			email			signup
+		4	'Brandy Boolean'	'bboolean@nasa.gov'	'1999-10-15'
+
+	
+
+
+
+
+
+
+
