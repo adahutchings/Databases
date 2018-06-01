@@ -1,0 +1,158 @@
+Exersises
+
+1. List the commands for adding, updating, and deleting data.
+	Adding : INSERT INTO 
+	Updating : UPDATE
+	Deleting : DELETE FROM 
+
+2. Explain the structure for each type of command.
+	Adding : INSERT INTO <table name> VALUES (<first column value>, <second column value>, etc); values must be in the order they appear in the table and follow data type of columns. 
+	Updating : UPDATE <table name> SET <column name>=<new info here> WHERE <unique identifier for the item>;
+	Deleting: DELETE FROM <table name> WHERE <unique identifier for the item>;
+
+
+3. What are some of the data types that can be used in tables? Give a real-world example of each type. 
+	varchar: used to enter stings. Similar to char but handles variable lengths of the strings. If not all of the character spaces you declared are filled, it will shrink to fit the length of what you have entered, using less storage space to retain the unused spaces. This could come in helpful when entering names into a database because each name is likely going to be a different amount of letters. 
+	year: used to store a year with display of four characters. Could be used if making a high school graduate directory to store the year the person graduated.
+	float8: deals with floating integers with a storage of 8 numerals passed the decimal. Could be used on a table where precision is highly important.
+
+4. Decide how to create a new table to hold a list of people invited to a wedding dinner. The table needs to have first and last names, whether they sent in their RSVP, the number of guests they are bringing, and the number of meals (1 for adults and 1/2 for children).
+	- Which data type would you use to store each of the following pieces of information?
+		-First and Last name - varchar
+		-Whether they sent in their RSVP - boolean true/false
+		-Number of guests - int
+		-Number of meals - float
+
+	-Write a command that creates the table to track the wedding dinner. 
+		CREATE DATABASE wedding
+		CREATE TABLE wedding (
+			guestID int,
+			firstname varchar,
+			lastname varchar,
+			rsvp bool,
+			guests int,
+			meals float
+		);
+			 
+		
+	-Write a command that adds a column to track whether the guest sent a thank you card.
+		ALTER TABLE wedding
+		ADD sentCard bool;
+
+	-You have decided to move the data about the meals to anther table, so write a command to remove the column storing the number of meals from the wedding table.
+		ALTER TABLE wedding
+		DROP COLUMN meals;
+
+	-The guests will need a place to sit at the reception, so write a command that adds a column for table number.
+		ALTER TABLE wedding
+		ADD tableNumber int;
+
+	-The wedding is over and we do not need to keep this information, so write a command that deletes the table numbers from the database.
+		ALTER TABLE wedding
+		DROP COLUMN tableNumber;
+
+5. Write a command to create a new table to hold the books in a library with the columns ISBN, title, author, genre, publishing date, number of copies, and available copies.
+		CREATE DATABASE library
+		CREATE TABLE library (
+			isbn int,
+			title varchar(30),
+			author varchar(30),
+			genre varchar(15),
+			publishingDate date,
+			copies int,
+			availableCopies int
+		);
+			
+
+	-Find three books and add their information to the table.
+		INSERT INTO library
+		VALUES (1851777377, "David Bowie Is", "Victoria Broackes", "Art", 2013-04-16, 2, 2);
+
+		INSERT INTO library
+		VALUES (0517543052, "Be Here Now", "Ram Dass", "Philosophy", 1971-10-12, 4, 4); 
+
+		INSERT INTO library
+		VALUES (1496062884,"Der Sudstern oder Das Land der Diamanten", "Jules Vern", 2014-02-26, 1, 1); 
+				
+	-Someone has just checked out one of the books. Change the number of available copies to 1 fewer.
+		UPDATE library
+		SET availableCopies = 1
+		WHERE isbn = 1851777377;
+
+	-Now one of the books has been added to the banned book list. Remove it from the table. 
+		DELETE FROM library
+		WHERE isbn = 1496062884;
+		
+6. Write a command to make a new table to hold spacecrafts. Information should include id, name, year launched, country of origin, a brief description of the mission, orbiting body, if it is currently operating, and its approximate miles from Earth. 
+		CREATE DATABASE spacecrafts
+		CREATE TABLE spacecrafts (
+			id int,
+			name varchar(20),
+			yearlaunched year,
+			country varchar(25),
+			mission varchar(100),
+			orbitingBody varchar(15),
+			operating bool,
+			distanceFromEarth int
+		);
+
+In addition to the table creation, provide commands that perform the following operations:
+	-Add three non-Earth-orbiting satellites to the table.
+		INSERT INTO spacecrafts
+		VALUES (243521, "Luna 4", 1966, "United States", "Observing the dark side of the moon", "The Moon", true, 238900);
+
+		INSERT INTO spacecrafts
+		VALUES (879405, "Jupiter 7", 2014, "Germany", "Watching the red spot", "Jupiter", true, 365000000);
+
+		INSERT INTO spacecrafts
+		VALUES (777564, "Falcon", 2017, "Mexico", "Studying Uranus's rings", "Uranus", true, 1700000000);
+	
+
+	-Remove one of the satellites from the table since it has just crashed into the planet. 
+		DELETE FROM spacecrafts
+		WHERE id = 879405;
+
+	-Edit another satellite because it is no longer operating and change the value to reflect that.
+		UPDATE spacecrafts
+		SET operating = false
+		WHERE id = 879405;
+
+
+7. Write a command to create a new table to hold the emails in your inbox. This Table should include an id, the subject line, the sender, any additional recipients, the body of the email, the timestamp, whether or not you have read the email, and the id of the email chain it's in. 
+		CREATE DATABASE email 
+		CREATE TABLE email (
+			id int, 
+			subject varchar(50),
+			sender varchar(30),
+			recipients text,
+			body text,
+			timestamp timestamp,
+			read bool,
+			chainId int
+		);
+
+
+Also provide commands that perform the following operations:
+	-Add three new emails to the inbox.
+		INSERT INTO emails
+		VALUES (43, "It's Been Awhile", "Aaron Lewis", "Mike Mushok", "It's been awhile since I couldn't hold my head up high. It's also been awhile since I first saw you. But can we get the band back together? Love, A-ron", "2018-06-01 01:23:13", false, 1);
+		
+		INSERT INTO emails
+		VALUES (145, "...", "Elliott Smith", "none", "Hey, Do you think we could get together at MFP later tonight? I could really use someone to talk to and maybe listen to all these amazing b sides with me. I can't think of anyone better. Let me know I guess... -xo", "1992-04-20 12:34:23", true, 1);
+
+		INSERT INTO emails
+		VALUES (678, "Work Meeting", "Sean Carter", "Beyonce", "Planning on meeting about the new album release and tour tomorrow at 2pm. If you can make it please respond so I can get enough snacks. Also are the kids coming? - J", 2017-01-01 16:23:12", true, 5);
+
+	-You deleted one of the emails, so write a command to remove the row from the inbox table.
+		DELETE FROM emails
+		WHERE id = 1;
+ 
+	-You started reading an email but just heard a crash in another room. Mark the email as unread before investigating the crash, so you can come back and read it later. 
+		UPDATE emails
+		SET read = false
+		WHERE id = 678;
+
+
+
+
+
